@@ -1,21 +1,20 @@
-[
-  {
-    "Product": "CPI",
-    "title": "Consumer Price Index (CPI)",
-    "Category": "Price Statistics",
-    "Geography": "All India, Rural, Urban, States",
-    "Frequency": "Monthly",
-    "TimePeriod": "2012 onwards",
-    "DataSource": "Price Statistics Division, Ministry of Statistics & Programme Implementation",
-    "Description": "Consumer Price Index (CPI) is designed to measure the changes over time in general level of retail prices of selected goods and services that households purchase for the purpose of consumption. Consumer Food Price Index (CFPI) are being compiled as weighted average of the indices of the ten subgroups, out of 12 sub-groups contained in ‘Food and Beverages’ group, excluding ‘Non-alcoholic beverages’ and ‘Prepared meals, snacks, sweets etc.’. The CPI and CFPI is compiled at the All India level for the Rural, Urban & Combined Sector. Source: National Metadata Structure (NMDS) for Statistical Products",
-    "lastUpdateDate": "12-July-24",
-    "FutureRelease": "August, 2024",
-    "BasePeriod": "2012",
-    "Keystatistics": "Inflation Rate, Consumer Price index, Consumer Food Price Index",
-    "NMDS": "Compliance of Metadata of Price Statistics",
-    "nmdslink": "https://www.mospi.gov.in/sites/default/files/Compliance_of_Metadata_of_Price_StatisticsUpdated.pdf",
-    "remarks": "Back series is the projection of the old series on a new base with the help of a suitable linking factor."
-  },
+[  {
+  "Product": "CPI",
+  "title": "Consumer Price Index (CPI)",
+  "category": "Price Statistics",
+  "geography": "All India, Rural, Urban, States",
+  "frequency": "Monthly",
+  "timePeriod": "2012 onwards",
+  "dataSource": "Price Statistics Division, Ministry of Statistics & Programme Implementation",
+  "description": "Consumer Price Index (CPI) is designed to measure the changes over time in general level of retail prices of selected goods and services that households purchase for the purpose of consumption. Consumer Food Price Index (CFPI) are being compiled as weighted average of the indices of the ten subgroups, out of 12 sub-groups contained in ‘Food and Beverages’ group, excluding ‘Non-alcoholic beverages’ and ‘Prepared meals, snacks, sweets etc.’. The CPI and CFPI is compiled at the All India level for the Rural, Urban & Combined Sector. Source: National Metadata Structure (NMDS) for Statistical Products",
+  "lastUpdateDate": "12-July-24",
+  "futureRelease": "August, 2024",
+  "basePeriod": "2012",
+  "keyStatistics": "Inflation Rate, Consumer Price index, Consumer Food Price Index",
+  "NMDS": "Compliance of Metadata of Price Statistics",
+  "nmdslink": "https://www.mospi.gov.in/sites/default/files/Compliance_of_Metadata_of_Price_StatisticsUpdated.pdf",
+  "remarks": "Back series is the projection of the old series on a new base with the help of a suitable linking factor."
+},
   {
     "Product": "IIP",
     "title": "Index Of Industrial Production (IIP)",

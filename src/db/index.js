@@ -9,6 +9,7 @@ const pool = new pg.Pool({
   password: "mypassword", // The password you set in the Docker run command
   port: 5432, // The port number you mapped in the Docker run command
 });
+
 export default async function connectdb() {
   try {
     await pool.connect();
@@ -17,6 +18,7 @@ export default async function connectdb() {
     });
   } catch (error) {
     console.log(error);
+    process.exit(1)
   }
 }
 export { pool };

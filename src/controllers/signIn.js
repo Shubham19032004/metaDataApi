@@ -2,6 +2,7 @@
 import generateAccessToken from "../utils/genrateAccessToken.js";
 import { pool } from "../db/index.js";
 import bcrypt from "bcrypt";
+
 export const signIn = async (req, res) => {
   try {
     const { email, password } = req.body;
@@ -12,25 +13,25 @@ export const signIn = async (req, res) => {
       password == "" ||
       password == null ||
       password == undefined
-    ) 
-    {
-      res.status(403).json({ error: "Both email and password are required" });
+    ) {
+      return res
+        .status(403)
+        .json({ error: "Both email and password are required" });
     }
     const query = "SELECT * FROM Users WHERE email=$1";
     const userrows = await pool.query(query, [email]);
     if (userrows.rowCount == 0) {
-      res.status(404).json({ error: "User not found" });
+      return res.status(404).json({ error: "User not found" });
     }
     const user = userrows.rows[0];
     const correctpassword = await bcrypt.compare(password, user.password);
     if (!correctpassword) {
-      res.status(400).json({ error: "Incorrect password" });
+      return res.status(400).json({ error: "Incorrect password" });
     }
     const accessToken = generateAccessToken({
       email: email,
       id: user.id,
     });
-
     const cookieOptions = {
       httpOnly: true,
       secure: process.env.NODE_ENV === "production",
@@ -38,15 +39,24 @@ export const signIn = async (req, res) => {
     };
 
     res.cookie("accessToken", accessToken, cookieOptions);
-    res.status(200).send({
-        data:  {
-            email:email
-        },
-        msg: "User Verified",
-        statusCode: true
+    return res.status(200).json({
+      data: {
+        email: email,
+      },
+      msg: "User Verified",
+      statusCode: true,
     });
   } catch (error) {
-    console.log(error)
-    res.status(500).json({ error: "unable to SignIn" });
+    console.log(error);
+    return res.status(500).json({ error: "unable to SignIn" });
   }
 };
+
+export const signOut=async(req,res)=>{
+  res.clearCookie("accessToken");
+  return res.status(200).json({
+    data: {},
+    msg: "Logout",
+    statusCode: true,
+  });
+}

@@ -17,7 +17,6 @@ CREATE TABLE MetaData (
     UNIQUE (product),
     PRIMARY KEY (product)
 );
-
 CREATE TABLE Users (
     id SERIAL PRIMARY KEY,
     email VARCHAR(100) NOT NULL,
@@ -26,5 +25,7 @@ CREATE TABLE Users (
     UNIQUE (email)
 );
 
-INSERT INTO Users(email, password, title) 
-VALUES('rahul@gmail.com', '$2a$12$0RGhGnlNzDiYeUvnZHX9LOuKCIINCVJetTtuPKQxIUOhiS.CN6TNK', 'dev');
+INSERT INTO Users(email, password, title) VALUES('shubham@gmail.com', '$2a$12$0RGhGnlNzDiYeUvnZHX9LOuKCIINCVJetTtuPKQxIUOhiS.CN6TNK', 'DEV');
+
+INSERT INTO Users(email, password, title) VALUES('rahul@gmail.com', '$2a$12$0RGhGnlNzDiYeUvnZHX9LOuKCIINCVJetTtuPKQxIUOhiS.CN6TNK', 'CPI');
+INSERT INTO Users(email, password, title) VALUES('rohit@gmail.com', '$2a$12$0RGhGnlNzDiYeUvnZHX9LOuKCIINCVJetTtuPKQxIUOhiS.CN6TNK', 'IIP');

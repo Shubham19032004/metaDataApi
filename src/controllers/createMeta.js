@@ -4,6 +4,7 @@ import { pool } from "../db/index.js";
 
 export const createMetaData = async (req, res) => {
   const { userTitle } = req.user;
+
   const {
     Product,
     title,
@@ -21,11 +22,22 @@ export const createMetaData = async (req, res) => {
     nmdslink,
     remarks,
   } = req.body;
+
   try {
-    if (userTitle != "dev") {
-      res.status(500).json({ error: "Only developer can create the metadata" });
+    if (userTitle != "DEV") {
+      return res.status(400).json({ error: "Only developers can create the metadata" });
     }
-    const query = `INSERT INTO MetaData (Product,title,category,geography,frequency,timePeriod,dataSource,description,lastUpdateDate,futureRelease,basePeriod,keyStatistics,NMDS,nmdslink,remarks) values($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15)`;
+
+    const getQuery = `SELECT * FROM MetaData WHERE Product=$1`;
+    const data = await pool.query(getQuery, [Product]);
+
+    if (data.rowCount != 0) {
+      return res.status(400).json({ error: "Metadata already exists" });
+    }
+
+    const query = `INSERT INTO MetaData (Product,title,category,geography,frequency,timePeriod,dataSource,description,lastUpdateDate,futureRelease,basePeriod,keyStatistics,NMDS,nmdslink,remarks) 
+                   VALUES($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15)`;
+
     await pool.query(query, [
       Product,
       title,
@@ -43,13 +55,13 @@ export const createMetaData = async (req, res) => {
       nmdslink,
       remarks,
     ]);
-    res.status(200).send({
+    return res.status(200).json({
       data: {},
       msg: "Metadata created successfully",
       statusCode: true,
     });
   } catch (error) {
     console.log(error);
-    res.status(500).json({ error: "unable to create metaDataa" });
+    return res.status(500).json({ error: "Unable to create metadata" });
   }
 };
