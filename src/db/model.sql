@@ -19,13 +19,11 @@ CREATE TABLE MetaData (
 );
 CREATE TABLE Users (
     id SERIAL PRIMARY KEY,
-    email VARCHAR(100) NOT NULL,
+    userName VARCHAR(100) NOT NULL,
     password VARCHAR(100),
-    title VARCHAR(100) NOT NULL,
-    UNIQUE (email)
+    role VARCHAR(100) NOT NULL,
+    UNIQUE (userName)
 );
-
-INSERT INTO Users(email, password, title) VALUES('shubham@gmail.com', '$2a$12$0RGhGnlNzDiYeUvnZHX9LOuKCIINCVJetTtuPKQxIUOhiS.CN6TNK', 'DEV');
-
-INSERT INTO Users(email, password, title) VALUES('rahul@gmail.com', '$2a$12$0RGhGnlNzDiYeUvnZHX9LOuKCIINCVJetTtuPKQxIUOhiS.CN6TNK', 'CPI');
-INSERT INTO Users(email, password, title) VALUES('rohit@gmail.com', '$2a$12$0RGhGnlNzDiYeUvnZHX9LOuKCIINCVJetTtuPKQxIUOhiS.CN6TNK', 'IIP');
+INSERT INTO Users(userName, password, role) VALUES('shubham@gmail.com', '$2a$12$0RGhGnlNzDiYeUvnZHX9LOuKCIINCVJetTtuPKQxIUOhiS.CN6TNK', 'admin');
+INSERT INTO Users(userName, password, role) VALUES('rahul@gmail.com', '$2a$12$0RGhGnlNzDiYeUvnZHX9LOuKCIINCVJetTtuPKQxIUOhiS.CN6TNK', 'CPI');
+INSERT INTO Users(userName, password, role) VALUES('rohit@gmail.com', '$2a$12$0RGhGnlNzDiYeUvnZHX9LOuKCIINCVJetTtuPKQxIUOhiS.CN6TNK', 'IIP');

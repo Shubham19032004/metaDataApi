@@ -1,9 +1,7 @@
 /** @format */
-
 import { pool } from "../db/index.js";
-
 export const updateMetaData = async (req, res) => {
-  const { userTitle } = req.user;
+  const { userRole } = req.user;
   const {
     title,
     category,
@@ -22,15 +20,15 @@ export const updateMetaData = async (req, res) => {
   } = req.body;
   const { productId } = req.params;
   try {
-    if (userTitle !== "DEV" && userTitle != productId) {
-        return res
+    if (userRole !== "admin" && userRole != productId) {
+      return res
         .status(400)
         .json({ error: " cannot update  the metadata invalid user" });
     }
     const getQuery = "SELECT * FROM MetaData WHERE Product=$1";
     const data = await pool.query(getQuery, [productId]);
     if (data.rowCount == 0) {
-      res.status(400).json({ error: `Unable to find Product=${productId}` });
+      res.status(404).json({ error: `Unable to find Product=${productId}` });
     }
     const query = `UPDATE MetaData 
     SET
@@ -66,13 +64,13 @@ export const updateMetaData = async (req, res) => {
       remarks,
       productId,
     ]);
-    return res.status(200).json({
+    return res.status(200).send({
       data: {},
       msg: "Metadata updated successfully",
       statusCode: true,
     });
   } catch (error) {
     console.log(error);
-    return res.status(500).json({ error: "unable to update metaDataa" });
+    return res.status(500).json({ error: "unable to update metaData" });
   }
 };

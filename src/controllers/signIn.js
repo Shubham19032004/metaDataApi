@@ -5,21 +5,21 @@ import bcrypt from "bcrypt";
 
 export const signIn = async (req, res) => {
   try {
-    const { email, password } = req.body;
+    const { userName, password } = req.body;
     if (
-      email == "" ||
-      email == null ||
-      email == undefined ||
+      userName == "" ||
+      userName == null ||
+      userName == undefined ||
       password == "" ||
       password == null ||
       password == undefined
     ) {
       return res
         .status(403)
-        .json({ error: "Both email and password are required" });
+        .json({ error: "Both userName and password are required" });
     }
-    const query = "SELECT * FROM Users WHERE email=$1";
-    const userrows = await pool.query(query, [email]);
+    const query = "SELECT * FROM Users WHERE userName=$1";
+    const userrows = await pool.query(query, [userName]);
     if (userrows.rowCount == 0) {
       return res.status(404).json({ error: "User not found" });
     }
@@ -29,7 +29,7 @@ export const signIn = async (req, res) => {
       return res.status(400).json({ error: "Incorrect password" });
     }
     const accessToken = generateAccessToken({
-      email: email,
+      userName: userName,
       id: user.id,
     });
     const cookieOptions = {
@@ -39,9 +39,9 @@ export const signIn = async (req, res) => {
     };
 
     res.cookie("accessToken", accessToken, cookieOptions);
-    return res.status(200).json({
+    return res.status(200).send({
       data: {
-        email: email,
+        userName: userName,
       },
       msg: "User Verified",
       statusCode: true,
@@ -52,11 +52,11 @@ export const signIn = async (req, res) => {
   }
 };
 
-export const signOut=async(req,res)=>{
+export const signOut = async (req, res) => {
   res.clearCookie("accessToken");
   return res.status(200).json({
     data: {},
     msg: "Logout",
     statusCode: true,
   });
-}
+};
